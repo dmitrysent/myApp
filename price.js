@@ -1,5 +1,5 @@
 // const usefulTime = 169;
-let usefulTime = document.querySelector('#usefulTime')
+const usefulTime = document.querySelector('#usefulTime')
 const helpTime = 13.5;
 const contactsOfHourse = 16;
 const rr = 91;
