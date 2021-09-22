@@ -6,3 +6,12 @@ h1 {
 .wrapper {
     margin: auto 15px;
 }
+
+.helpTime,
+.result {
+    display: none;
+}
+.visible {
+    display: block;
+}
+

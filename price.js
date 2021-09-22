@@ -66,6 +66,8 @@ let paymentHelpBeforeTax = helpTime * 150;
 let paymentBeforeTaxWithPT = (usefulTime + paymentWithPartTime1 + paymentWithPartTime2) * paymantWithIncrCoefficient + paymentHelpBeforeTax;
 let paymentAfterTaxWithPT = paymentBeforeTaxWithPT * (1 - 0.13);
 
+let elemText = document.createTextNode("Привет мир")
+
 console.log('Стоимость часа с учётом к/ч KPI1: ' + kpi1 + ' рублей')
 console.log('Коэффициент RR KPI2: ' +  kpi2)
 console.log('Коэффициент FCR KPI3: ' + kpi3)

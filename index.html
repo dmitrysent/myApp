@@ -11,28 +11,35 @@
     <h1>Расчёт заработной платы сотрудника первой линии поддержки КЦ Ozon</h1>
     <div class="wrapper">
         <p>Часы нахождения в системе</p>
-        <input type="text" id="usefulTime">
+        <input type="number" id="usefulTime">
 
         <p>Контакты в час</p>
-        <input type="text" id="contactsOfHourse">
+        <input type="number" id="contactsOfHourse">
 
         <p>Клиентская оценка RR, %</p>
-        <input type="text" id="rr">
+        <input type="number" id="rr">
 
         <p>FCR Чат, %</p>
-        <input type="text" id="fcr">
+        <input type="number" id="fcr">
 
         <p>Количество часов "Помощь на линии 1" по ставке х1.5</p>
-        <input type="text" id="partTime1">
+        <input type="number" id="partTime1">
 
         <p>Количество часов "Помощь на линии 2" по ставке х2</p>
-        <input type="text" id="partTime2">
+        <input type="number" id="partTime2">
 
-        <input type="checkbox" name="Являешься ли наставником?" placeholder="Являешься ли наставником?">
-        <p>Количество часов наставничества</p>
-        <input type="text" id="helpTime">
+        
+        <p><input type="checkbox" id="checkbox"> Являешься ли наставником?</p>
+        <div class="helpTime" id="helpTimeBlock">
+            <p>Количество часов наставничества</p>
+            <input type="number" id="helpTime">
+        </div>
 
-        <button id="button"> click me</button>
+        <button id="button">Результат</button>
+
+        <div class="result" id="result">
+            <p>Количество часов</p>
+        </div>
     </div>
 
     <script src="script.js"></script>

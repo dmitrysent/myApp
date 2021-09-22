@@ -1,5 +1,9 @@
-
-
+const helpTimeBlock = document.querySelector('#helpTimeBlock');
+    checkbox.addEventListener('change', function () {
+        if (this.checked) {
+            helpTimeBlock.classList.add("visible")
+        } else helpTimeBlock.classList.remove("visible")
+    })
 
 
 button.onclick = function() {
@@ -10,6 +14,8 @@ button.onclick = function() {
     const partTime1 = +document.querySelector('#partTime1').value;
     const partTime2 = +document.querySelector('#partTime2').value;
     const helpTime = +document.querySelector('#helpTime').value;
+    const checkbox = document.querySelector('#checkbox');
+    
 
     console.log(usefulTime)
     console.log(contactsOfHourse)
@@ -18,6 +24,9 @@ button.onclick = function() {
     console.log(partTime1)
     console.log(partTime2)
     console.log(helpTime)
+    console.log(checkbox)
+    
+
 
     switch (true) {
     case (contactsOfHourse < 7): kpi1 = 75
@@ -77,6 +86,10 @@ button.onclick = function() {
 
     let paymentBeforeTaxWithPT = (usefulTime + paymentWithPartTime1 + paymentWithPartTime2) * paymantWithIncrCoefficient + paymentHelpBeforeTax;
     let paymentAfterTaxWithPT = paymentBeforeTaxWithPT * (1 - 0.13);
+
+
+    let result = document.querySelector('#result').classList.add("visible")
+
 
     console.log('Стоимость часа с учётом к/ч KPI1: ' + kpi1 + ' рублей')
     console.log('Коэффициент RR KPI2: ' +  kpi2)
