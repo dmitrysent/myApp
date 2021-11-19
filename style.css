@@ -4,14 +4,56 @@ h1 {
 }
 
 .wrapper {
-    margin: auto 15px;
+    padding-top: 80px;
+    width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
 }
 
-.helpTime,
-.result {
+.time {
+    display: block;
+}
+
+input {
+    display: block;
+    width: 180px;
+    height: 30px;
+    padding: 0 15px;
+    font-size: 16px;
+}
+
+.helpTime {
     display: none;
+    margin-bottom: 25px;
 }
 .visible {
     display: block;
 }
 
+button {
+    margin-top: 50px;
+    margin-left: 130px;
+    background-color: #195ff6;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    width: 160px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;   
+    
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #163f8e;
+}
+
+
+.result-payAllNdfl {
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 20px;
+}

@@ -1,33 +1,26 @@
-const helpTimeBlock = document.querySelector('#helpTimeBlock');
-    checkbox.addEventListener('change', function () {
-        if (this.checked) {
-            helpTimeBlock.classList.add("visible")
-        } else helpTimeBlock.classList.remove("visible")
-    })
+// const helpTimeBlock = document.querySelector('#helpTimeBlock');
+
+// checkbox.addEventListener('change', function () {
+//     if (this.checked) {
+//         helpTimeBlock.classList.add("visible")
+//     } else helpTimeBlock.classList.remove("visible")
+// });
 
 
 button.onclick = function() {
-    const usefulTime = +document.querySelector('#usefulTime').value;
-    const contactsOfHourse = +document.querySelector('#contactsOfHourse').value;
-    const rr = +document.querySelector('#rr').value;
-    const fcr = +document.querySelector('#fcr').value;
-    const partTime1 = +document.querySelector('#partTime1').value;
-    const partTime2 = +document.querySelector('#partTime2').value;
-    const helpTime = +document.querySelector('#helpTime').value;
-    const checkbox = document.querySelector('#checkbox');
+    const usefulTime = +document.querySelector('#usefulTime').value,
+          timeOfX3 = +document.querySelector('#timeOfX3').value,
+          timeOfX4 = +document.querySelector('#timeOfX4').value,
+          contactsOfHourse = +document.querySelector('#contactsOfHourse').value,
+          rr = +document.querySelector('#rr').value,
+          fcr = +document.querySelector('#fcr').value;
+        //   partTime1 = +document.querySelector('#partTime1').value,
+        //   partTime2 = +document.querySelector('#partTime2').value,
+        //   helpTime = +document.querySelector('#helpTime').value,
+        //   checkbox = document.querySelector('#checkbox');
     
 
-    console.log(usefulTime)
-    console.log(contactsOfHourse)
-    console.log(rr)
-    console.log(fcr)
-    console.log(partTime1)
-    console.log(partTime2)
-    console.log(helpTime)
-    console.log(checkbox)
-    
-
-
+    // к/ч
     switch (true) {
     case (contactsOfHourse < 7): kpi1 = 75
     break
@@ -46,19 +39,20 @@ button.onclick = function() {
     default: kpi1 = 190;
     }
 
-
+    // RR
     switch (true) {
         case (rr < 80): kpi2 = 0.2
         break
-        case (rr >= 80 && rr < 85): kpi2 = 0.4
+        case (rr >= 80 && rr < 85): kpi2 = 0.5
         break
-        case (rr >= 85 && rr < 88): kpi2 = 0.5
+        case (rr >= 85 && rr < 88): kpi2 = 0.6
         break
-        case (rr >= 88 && rr < 91): kpi2 = 0.6
-        break
+        // case (rr >= 88 && rr < 91): kpi2 = 0.6
+        // break
         default: kpi2 = 0.7;
     }
 
+    // FCR
     switch (true) {
         case (fcr < 80): kpi3 = 0.2
         break
@@ -72,39 +66,60 @@ button.onclick = function() {
     }
 
 
+    /*
+    const incrCoefficient = kpi2 + kpi3,                                   //повышающий коэф
+        paymantWithIncrCoefficient = kpi1 * incrCoefficient,             //стоимость часа с учетом повыш коэф
+        paymentBeforeTax = usefulTime * paymantWithIncrCoefficient,         //до вычета ндфл
+        paymentAfterTax = paymentBeforeTax * (1 - 0.13),                    // после вычета ндфл
+        // paymentWithPartTime1 = partTime1 * 0.5,                             // подработки х1.5
+        // paymentWithPartTime2 = partTime2,                                   // подраотки х3
+        paymentHelpBeforeTax = helpTime * 150,                              // наставничество
+        paymentAll = usefulTime + paymentWithPartTime1 + paymentWithPartTime2, // все подработки
+        paymentBeforeTaxWithPT = (usefulTime + paymentWithPartTime1 + paymentWithPartTime2) * paymantWithIncrCoefficient + paymentHelpBeforeTax, // 
+        paymentAfterTaxWithPT = paymentBeforeTaxWithPT * (1 - 0.13);
+
+    */
+
+    const incrCoefficient = kpi2 + kpi3, //повышающий коэф
+          paymantWithIncrCoefficient = kpi1 * incrCoefficient, //стоимость часа с учетом повыш коэф
+          sumOfTimeX3X4 = timeOfX3 + timeOfX4;           // количество подработок
+        //   paymentHelpBeforeTax = helpTime * 150;
+
+    
+    if (contactsOfHourse >= 10) {
+        if ( (usefulTime - sumOfTimeX3X4 - 120) >= 0 ) {
+            payment = 120 * paymantWithIncrCoefficient + ((usefulTime - 120 - sumOfTimeX3X4) * 380) + (timeOfX3 * paymantWithIncrCoefficient * 3) + (timeOfX4 * paymantWithIncrCoefficient * 4);
+        } else {
+            payment = (usefulTime - sumOfTimeX3X4) * paymantWithIncrCoefficient + (timeOfX3 * paymantWithIncrCoefficient * 3) + (timeOfX4 * paymantWithIncrCoefficient * 4);
+        }
+    } else {
+        payment = (usefulTime - sumOfTimeX3X4) * paymantWithIncrCoefficient + (timeOfX3 * paymantWithIncrCoefficient * 3) + (timeOfX4 * paymantWithIncrCoefficient * 4);
+    }
+
+    console.log(usefulTime - sumOfTimeX3X4 - 120);
+    console.log(120 * paymantWithIncrCoefficient);
+    console.log(((usefulTime - 120 - sumOfTimeX3X4) * 380));
+    console.log((timeOfX3 * paymantWithIncrCoefficient * 3));
+    
+    
+    const paymentNDFL = payment * 0.87;
+    // const paymentHelpAfterTax = paymentHelpBeforeTax * 0.87;
+    const resultKpi2 = document.querySelector('.result-kpi2');
+    const resultKpi3 = document.querySelector('.result-kpi3');
+    const resultKpi = document.querySelector('.result-kpi');
+    // const resultPayHelp = document.querySelector('.result-payHelp');
+    // const resultPayUseful = document.querySelector('.result-payUseful');
+    const resultPayAll = document.querySelector('.result-payAll');
+    const resulPayAllNdfl = document.querySelector('.result-payAllNdfl');
 
 
-    let incrCoefficient = kpi2 + kpi3
-    let paymantWithIncrCoefficient = kpi1 * incrCoefficient
-    let paymentBeforeTax = usefulTime * paymantWithIncrCoefficient
-    let paymentAfterTax = paymentBeforeTax * (1 - 0.13)
-    let paymentWithPartTime1 = partTime1 * 0.5;
-    let paymentWithPartTime2 = partTime2;
-    let paymentHelpBeforeTax = helpTime * 150;
-    let paymentAll = usefulTime + paymentWithPartTime1 + paymentWithPartTime2;
 
 
-    let paymentBeforeTaxWithPT = (usefulTime + paymentWithPartTime1 + paymentWithPartTime2) * paymantWithIncrCoefficient + paymentHelpBeforeTax;
-    let paymentAfterTaxWithPT = paymentBeforeTaxWithPT * (1 - 0.13);
+    resultKpi2.innerHTML = `Коэффициент RR KPI2: ${kpi2}`;
+    resultKpi3.innerHTML = `Коэффициент FCR KPI3: ${kpi3}`;
+    resultKpi.innerHTML = `Стоимость часа с учётом KPI: ${paymantWithIncrCoefficient.toFixed(2)} рублей `;
+    // resultPayHelp.innerHTML = `Выплата за наставничество: ${paymentHelpBeforeTax} рублей`;
+    resultPayAll.innerHTML = `Общая выплата: ${payment} рублей`;
+    resulPayAllNdfl.innerHTML = `ИТОГО к выплате с вычетом НДФЛ: ${paymentNDFL} рублей`;
 
-
-    let result = document.querySelector('#result').classList.add("visible")
-
-
-    console.log('Стоимость часа с учётом к/ч KPI1: ' + kpi1 + ' рублей')
-    console.log('Коэффициент RR KPI2: ' +  kpi2)
-    console.log('Коэффициент FCR KPI3: ' + kpi3)
-    console.log('Повышающий коэффициент KPI2 + KPI3: ' + +incrCoefficient.toFixed(2))
-    console.log('Стоимость часа с учётом повышающего коэффициента KPI1 * (KPI2 + KPI3): ' + +paymantWithIncrCoefficient.toFixed(5) + ' рублей')
-    // console.log('Количество отработанных часов: ' + usefulTime + 'ч')
-    // console.log('Сумма к оплате до вычета НДФЛ 13%: ' + paymentBeforeTax + ' рублей')
-    // console.log('Сумма к оплате с вычетом НДФЛ: ' + paymentAfterTax + ' рублей')
-    // console.log('Количество отработанных часов (полезное время): ' + usefulTime)
-    console.log('Количество часов с учётом подработок (к оплате): ' + paymentAll)
-    console.log('Из них количество подработок "Помощь на линии 1" по ставке х1.5: ' + partTime1)
-    console.log('Из них количество подработок "Помощь на линии 2" по ставке х2: ' + partTime2)
-    console.log('Количество часов по наставничеству: ' + helpTime)
-    console.log('Сумма к оплате за наставничество до вычета НДФЛ 13% : ' + paymentHelpBeforeTax)
-    console.log('Сумма к оплате до вычета НДФЛ 13% с учётом подработок: ' + paymentBeforeTaxWithPT + ' рублей')
-    console.log('Сумма к оплате с вычетом НДФЛ с учётом подработок: ' + paymentAfterTaxWithPT + ' рублей')
 }
