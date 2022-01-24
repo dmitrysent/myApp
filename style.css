@@ -8,8 +8,9 @@ h1 {
     width: 1240px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     font-size: 18px;
+    gap: 80px;
 }
 
 .time {
@@ -56,4 +57,8 @@ button:hover {
     font-weight: 600;
     font-size: 20px;
     margin-top: 20px;
+}
+
+.result-block {
+    background-color: rgb(165, 161, 161);
 }
