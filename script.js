@@ -119,7 +119,8 @@ btn.addEventListener("click", () => {
                         <p> KPI_3(повторные обращения FCR): ${kpi3} </p> 
                         <p> Стоимость часа с учётом KPI: ${kpi1} * (${kpi2} + ${kpi3}) = ${paymantWithIncrCoefficient.toFixed(2)} рублей </p> 
                         <p> Сумма к перечислению: ${payment.toFixed(2)} рублей </p> 
-                        <p> Сумма к зачислению с учётом удержания НДФЛ: ${paymentNDFL.toFixed(2)} рублей </p>
+                        
+                        <p> <i>Сумма к зачислению с учётом удержания НДФЛ: <b>${paymentNDFL.toFixed(2)} рублей </b> </i> </p>
         `;
     wrapper.append(elem);
 });
