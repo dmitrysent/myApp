@@ -18,7 +18,7 @@ btn.addEventListener("click", () => {
 
     //   helpTime = +document.querySelector('#helpTime').value,
     //   checkbox = document.querySelector('#checkbox');
-    console.log(rr);
+
 
     if (contactsOfHourse < 7) {
         kpi1 = 75;
@@ -70,67 +70,44 @@ btn.addEventListener("click", () => {
 
       */
 
-    const incrCoefficient = kpi2 + kpi3; //повышающий коэф
-    const paymantWithIncrCoefficient = kpi1 * incrCoefficient; //стоимость часа с учетом повыш коэф
-    const sumOfTimeX3X4 = timeOfX3 + timeOfX4; // количество подработок
+
+    // const incrCoefficient = kpi2 + kpi3, //повышающий коэф
+    //     paymantWithIncrCoefficient = kpi1 * incrCoefficient, //стоимость часа с учетом повыш коэф
+    //     paymentBeforeTax = usefulTime * paymantWithIncrCoefficient, //до вычета ндфл
+    //     paymentAfterTax = paymentBeforeTax * (1 - 0.13), // после вычета ндфл
+    //     // paymentWithPartTime1 = partTime1 * 0.5,                             // подработки х1.5
+    //     // paymentWithPartTime2 = partTime2,                                   // подраотки х3
+    //     paymentHelpBeforeTax = helpTime * 150, // наставничество
+    //     paymentAll = usefulTime + paymentWithPartTime1 + paymentWithPartTime2, // все подработки
+    //     paymentBeforeTaxWithPT = (usefulTime + paymentWithPartTime1 + paymentWithPartTime2) * paymantWithIncrCoefficient + paymentHelpBeforeTax, // 
+    //     paymentAfterTaxWithPT = paymentBeforeTaxWithPT * (1 - 0.13);
+
+
+
+    const incrCoefficient = kpi2 + kpi3, //повышающий коэф
+        paymantWithIncrCoefficient = kpi1 * incrCoefficient, //стоимость часа с учетом повыш коэф
+        sumOfTimeX3X4 = timeOfX3 + timeOfX4; // количество подработок
     //   paymentHelpBeforeTax = helpTime * 150;
 
     if (sumOfTimeX3X4 > usefulTime) {
-        alert(
-            `Количество подработок ${sumOfTimeX3X4} ч превышает полезное время ${usefulTime} ч. Введи Корректное значение`
-        );
+        alert(`Количество подработок ${sumOfTimeX3X4}ч превышает полезное время ${usefulTime}ч. Введи Корректное значение`);
         window.location.reload();
-    }
+    };
 
     if (contactsOfHourse >= 10) {
-        if (sumOfTimeX3X4 >= 120 && usefulTime >= sumOfTimeX3X4) {
-            console.log("1");
-            payment =
-                timeOfX3 * 3 * paymantWithIncrCoefficient +
-                timeOfX4 * 4 * paymantWithIncrCoefficient +
-                (usefulTime - sumOfTimeX3X4) * 380;
+        if (sumOfTimeX3X4 >= 120 && (usefulTime >= sumOfTimeX3X4)) {
+            payment = (timeOfX3 * 3 * paymantWithIncrCoefficient) + (timeOfX4 * 4 * paymantWithIncrCoefficient) + (usefulTime - sumOfTimeX3X4) * 380;
         } else if (usefulTime >= 120 && sumOfTimeX3X4 < 120) {
-            console.log("2");
-            payment =
-                timeOfX3 * 3 * paymantWithIncrCoefficient +
-                timeOfX4 * 4 * paymantWithIncrCoefficient +
-                (120 - sumOfTimeX3X4) * paymantWithIncrCoefficient +
-                (usefulTime - 120) * 380;
+            payment = (timeOfX3 * 3 * paymantWithIncrCoefficient) + (timeOfX4 * 4 * paymantWithIncrCoefficient) + (120 - sumOfTimeX3X4) * paymantWithIncrCoefficient + (usefulTime - 120) * 380;
         } else {
-            console.log("3");
-            payment =
-                (usefulTime - sumOfTimeX3X4) * paymantWithIncrCoefficient +
-                timeOfX3 * paymantWithIncrCoefficient * 3 +
-                timeOfX4 * paymantWithIncrCoefficient * 4;
+            payment = (usefulTime - sumOfTimeX3X4) * paymantWithIncrCoefficient + (timeOfX3 * paymantWithIncrCoefficient * 3) + (timeOfX4 * paymantWithIncrCoefficient * 4);
         }
     } else {
-        console.log("4");
-        payment =
-            (usefulTime - sumOfTimeX3X4) * paymantWithIncrCoefficient +
-            timeOfX3 * paymantWithIncrCoefficient * 3 +
-            timeOfX4 * paymantWithIncrCoefficient * 4;
+        payment = (usefulTime - sumOfTimeX3X4) * paymantWithIncrCoefficient + (timeOfX3 * paymantWithIncrCoefficient * 3) + (timeOfX4 * paymantWithIncrCoefficient * 4);
     }
 
-    const paymentNDFL = payment * 0.87;
-    // const paymentHelpAfterTax = paymentHelpBeforeTax * 0.87;
-    const resultKpi2 = document.querySelector(".result-kpi2");
-    const resultKpi3 = document.querySelector(".result-kpi3");
-    const resultKpi = document.querySelector(".result-kpi");
-    // const resultPayHelp = document.querySelector('.result-payHelp');
-    // const resultPayUseful = document.querySelector('.result-payUseful');
-    const resultPayAll = document.querySelector(".result-payAll");
-    const resultPayAllNdfl = document.querySelector(".result-payAllNdfl");
-    // const formula = document.querySelector('.formula');
 
-    /*
-      resultKpi2.innerHTML = `Коэффициент RR KPI2: ${kpi2}`;
-      resultKpi3.innerHTML = `Коэффициент FCR KPI3: ${kpi3}`;
-      resultKpi.innerHTML = `Стоимость часа с учётом KPI: ${paymantWithIncrCoefficient.toFixed(2)} рублей `;
-      // resultPayHelp.innerHTML = `Выплата за наставничество: ${paymentHelpBeforeTax} рублей`;
-      resultPayAll.innerHTML = `Общая выплата: ${payment} рублей`;
-      resultPayAllNdfl.innerHTML = `ИТОГО к выплате с вычетом НДФЛ: ${paymentNDFL} рублей`;
-      // formula.innerHTML = `Формула расчёта: (${timeOfX3} * 3 * ${paymantWithIncrCoefficient}) + (${timeOfX4} * 4 * ${paymantWithIncrCoefficient}) + (120 - (${timeOfX3} + ${timeOfX4})) * ${paymantWithIncrCoefficient} + (${usefulTime} - 120) * 380 = ${payment} рублей`;
-          */
+    let paymentNDFL = payment * (1 - 0.13);
 
     let wrapper = document.querySelector(".wrapper");
 
